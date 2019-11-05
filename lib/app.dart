@@ -219,11 +219,12 @@ class AppState extends State<MyAPP> {
               ),
               trailing: Icon(
                 Icons.message,
-                color: Colors.black12,
+                color: Colors.black,
                 size: 22,
               ),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pushNamed(context, '/friends');
               },
             ),
             ListTile(
@@ -233,10 +234,11 @@ class AppState extends State<MyAPP> {
               ),
               trailing: Icon(
                 Icons.favorite,
-                color: Colors.black12,
+                color: Colors.black,
                 size: 22,
               ),
               onTap: () {
+                Navigator.pushNamed(context, '/friends');
                 Navigator.pop(context);
               },
             ),
@@ -247,11 +249,12 @@ class AppState extends State<MyAPP> {
               ),
               trailing: Icon(
                 Icons.settings,
-                color: Colors.black12,
+                color: Colors.black,
                 size: 22,
               ),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pushNamed(context, '/friends');
               },
             ),
           ],
