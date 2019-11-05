@@ -3,6 +3,8 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'flash.dart';
 import './app.dart';
 import 'package:flutter_app/search.dart';
+import 'package:flutter_app/info/sliver.dart';
+
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -16,6 +18,7 @@ void main() => runApp(MaterialApp(
       routes: <String, WidgetBuilder>{
         "app":(BuildContext context) => new MyAPP(),
         "search":(BuildContext context) => new Search(),
+        "sliver":(BuildContext context) => new SliverView(),
         "/friends": (_) => WebviewScaffold(
               url: "https://blog.csdn.net/csdn_aiyang",
               appBar: AppBar(

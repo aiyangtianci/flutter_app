@@ -29,7 +29,7 @@ class loadingState extends State<FlashPage> {
         children: <Widget>[
           Image.asset('images/welcome.jpeg',
               fit: BoxFit.fill,
-              width: double.infinity,//无穷；无限大；无限距
+              width: double.infinity, //无穷；无限大；无限距
               height: double.infinity),
           new Positioned(
             //定位：偏移指定像素值
@@ -43,7 +43,7 @@ class loadingState extends State<FlashPage> {
   }
 }
 
-Widget _NextGoButton(BuildContext context){
+Widget _NextGoButton(BuildContext context) {
   return new GestureDetector(
     onTap: () {
       Navigator.of(context).pushReplacementNamed('app');
@@ -51,12 +51,17 @@ Widget _NextGoButton(BuildContext context){
     child: new Container(
       padding: const EdgeInsets.all(15.0),
       decoration: BoxDecoration(
-        color: Theme.of(context).buttonColor,
-        borderRadius: new BorderRadius.circular(30.0),
+        color: Colors.lightBlue[50],
+        borderRadius: new BorderRadius.circular(25.0),
       ),
       child: new Text(
-        '立即跳过',
-        style: TextStyle(color: Colors.red,fontSize: 17.0,decoration: TextDecoration.none,fontStyle: FontStyle.normal),
+        '跳过',
+        style: TextStyle(
+            color: Colors.orange,
+            fontSize: 15.0,
+            decoration: TextDecoration.none,
+            fontStyle: FontStyle.normal,
+            letterSpacing: 5.0),
       ),
     ),
   );

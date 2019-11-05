@@ -19,7 +19,7 @@ class ImItem extends StatelessWidget{
       return TouchCallBack(
         onPressed: (){
           if(title == '好友动态'){
-            Navigator.pushNamed(context, '/friends');
+            Navigator.pushNamed(context, 'sliver');
           }else{
             final snakbar = new SnackBar(content: new Text('按下事件触发'));
             Scaffold.of(context).showSnackBar(snakbar);
