@@ -99,7 +99,7 @@ class SliverView extends StatelessWidget {
             title: Text('展览馆'),
             pinned: true,
             floating: true,
-            expandedHeight: 150.0,
+            expandedHeight: 180.0,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 'Look'.toUpperCase(),

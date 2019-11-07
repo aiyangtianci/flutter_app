@@ -37,7 +37,7 @@ class FirstScreen extends StatelessWidget {
 }
 
 /**
- * 跳转方法
+ * 跳转方法+回传值 result
  */
 _navigatetoSecondScreen(BuildContext context, Product product) async {
   final result = await Navigator.push(

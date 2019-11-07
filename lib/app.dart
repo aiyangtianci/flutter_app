@@ -207,8 +207,8 @@ class AppState extends State<MyAPP> {
                 image: DecorationImage(
                   image: AssetImage('images/welcome.jpeg'),
                   fit: BoxFit.cover,
+                  //颜色过滤
                   colorFilter: ColorFilter.mode(Color(0xff29B6F6), BlendMode.darken),
-
                 ),
               ),
             ),
