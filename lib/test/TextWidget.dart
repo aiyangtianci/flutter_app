@@ -163,7 +163,7 @@ class ChipDemo extends StatelessWidget {
             height: 52.0,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _tags.map((tag){
             return Chip(
               label:Text(tag),
