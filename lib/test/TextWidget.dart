@@ -7,8 +7,7 @@ void main() {
           appBar: new AppBar(
             title: new Text("文本控件"),
           ),
-//        body: new TextDemo()
-          body: new TextFieldDemo()) //,
+          body: new ChipDemo()) //,
       ));
 }
 
@@ -100,10 +99,82 @@ class RichTextDemo extends StatelessWidget {
             ),
         children: [
           TextSpan(
-            text: '子view，继承父style,也可以自定义',
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-            )
+              text: '子view，继承父style,也可以自定义',
+              style: TextStyle(
+                fontWeight: FontWeight.w300,
+              )),
+        ],
+      ),
+    );
+  }
+}
+//小标签
+class ChipDemo extends StatelessWidget {
+  List<String> _tags = ['Apple','Banana','Lemon'];
+  bool isCheck = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Wrap(
+        //wrap 代替row，可以设置间距和行距，自动换行
+        spacing: 15.0,
+        runSpacing: 2.0,
+        children: <Widget>[
+          Chip(
+            label: Text('one'),
+          ),
+          ActionChip(
+            label: Text('two'),
+            backgroundColor: Colors.orange[300],
+            onPressed: (){
+
+            },
+          ),
+          ChoiceChip(
+            selected: isCheck,
+            onSelected: (value){//value是选中状态
+              isCheck =!isCheck;
+              print(value);
+            },
+            selectedColor: Colors.blue[100],
+            label: Text('three'),
+            avatar: CircleAvatar(
+              child: Text('阳'),
+              backgroundColor: Colors.grey[100],
+            ),
+          ),
+          FilterChip(
+            label: Text('four'),
+            avatar: CircleAvatar(
+              backgroundImage: NetworkImage(
+                  'https://avatar.csdnimg.cn/F/D/2/3_csdn_aiyang.jpg'),
+            ),
+            selected: isCheck,//未被选中
+            onSelected: (value){//value是选中状态
+                isCheck =!isCheck;
+                print(value);
+            },
+
+          ),
+          Divider(
+            //分割线
+            color: Colors.grey,
+            height: 52.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _tags.map((tag){
+            return Chip(
+              label:Text(tag),
+              onDeleted: () {
+                _tags.remove(tag);
+              },
+              deleteIcon: Icon(Icons.delete_forever),
+              deleteIconColor: Colors.white,
+              deleteButtonTooltipMessage: 'remove this chip of tag',
+            );
+            },).toList(),
           ),
         ],
       ),

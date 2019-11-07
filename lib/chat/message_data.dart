@@ -14,6 +14,8 @@ class MessageData {
 
   MessageType type;
 
+  bool selected =false;
+
   MessageData(this.avatar, this.title, this.subTitle, this.time, this.type);
 }
 
