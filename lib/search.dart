@@ -24,12 +24,23 @@ class SearchState extends State<Search> {
   _getText(String txt) {
     return TouchCallBack(
       isFeed: false,
-      onPressed: () {},
+      onPressed: () {
+        _SetTextFieldLable(txt);
+      },
       child: Text(
         txt,
-        style: TextStyle(fontSize: 14.0, color: Color(0xffb5b5b5)),
+        style: TextStyle(fontSize: 14.0, color: Colors.blueGrey),
       ),
     );
+  }
+
+  bool isCheck = true;
+  String _TextFieldLable = "";
+
+  _SetTextFieldLable(String lable) {
+    setState(() {
+      _TextFieldLable = lable;
+    });
   }
 
   @override
@@ -71,10 +82,12 @@ class SearchState extends State<Search> {
                       Expanded(
                         child: TextField(
                           focusNode: _requestFocus(),
-                          style: TextStyle(color: Colors.black, fontSize: 16.0),
+                          controller: new TextEditingController(text: this._TextFieldLable),
+                          style: TextStyle(color: Colors.black, fontSize: 18.0),
                           onChanged: (String text) {},
                           decoration: InputDecoration(
-                              hintText: '搜索', border: InputBorder.none),
+                              hintText: '搜索',
+                              border: InputBorder.none),
                         ),
                       ),
                       Container(
@@ -93,7 +106,7 @@ class SearchState extends State<Search> {
               margin: const EdgeInsets.only(top: 50.0),
               child: Text(
                 '常用搜索',
-                style: TextStyle(fontSize: 16.0, color: Color(0xffb5b5b5)),
+                style: TextStyle(fontSize: 16.0, color: Colors.black54),
               ),
             ),
             Padding(
@@ -102,15 +115,48 @@ class SearchState extends State<Search> {
                 //对齐方式采用均匀对齐
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  _getText('朋友'),
-                  _getText('聊天'),
-                  _getText('群组'),
-                  _getText('测试'),
+                  Chip(
+                    label: Text('朋友'),
+                    avatar: CircleAvatar(
+                      child: Text('阳'),
+                      backgroundColor: Colors.grey[100],
+                    ),
+                  ),
+                  ActionChip(
+                    label: Text('群组'),
+                    backgroundColor: Colors.orange[300],
+                    onPressed: () {
+                      _SetTextFieldLable('群组');
+                    },
+                  ),
+                  FilterChip(
+                    label: Text('聊天'),
+                    avatar: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          'https://avatar.csdnimg.cn/F/D/2/3_csdn_aiyang.jpg'),
+                    ),
+                    selected: isCheck, //未被选中
+                    onSelected: (value) {
+                      //value是选中状态
+                      isCheck = value;
+                      _SetTextFieldLable('聊天');
+                    },
+                  ),
+                  ChoiceChip(
+                    selected: isCheck,
+                    onSelected: (value) {
+                      //value是选中状态
+                      isCheck = value;
+                      _SetTextFieldLable('动态');
+                    },
+                    selectedColor: Colors.blue[100],
+                    label: Text('动态'),
+                  ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30.0,right: 30.0),
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
@@ -118,6 +164,15 @@ class SearchState extends State<Search> {
                   _getText('Flutter'),
                   _getText('Dart'),
                   _getText('C++'),
+                  Chip(
+                    label: Text('Delete'),
+                    onDeleted: () {
+                      _SetTextFieldLable('Delete');
+                    },
+                    deleteIcon: Icon(Icons.delete_forever),
+                    deleteIconColor: Colors.white,
+                    deleteButtonTooltipMessage: 'remove this chip of tag',
+                  ),
                 ],
               ),
             ),

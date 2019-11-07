@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -14,6 +15,8 @@ void main() {
 class TextFieldDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    //绑定数据
     final TextEditingController controller = TextEditingController();
     controller.addListener(() {
       print('${controller.text}');
@@ -27,10 +30,11 @@ class TextFieldDemo extends StatelessWidget {
           maxLength: 30,
           //右下角出现输入数量统计字符串
           maxLines: 1,
-          autocorrect: true,
-          autofocus: true,
-          obscureText: false,
+          autocorrect: true,//是否自动更正
+          autofocus: true,//是否自动对焦
+          obscureText: true,//是否是密码
           textAlign: TextAlign.center,
+          inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],//允许的输入格式
           style: TextStyle(fontSize: 26.0, color: Colors.green),
           onChanged: (text) {
             print('文本内容改变${text}');
@@ -155,7 +159,6 @@ class ChipDemo extends StatelessWidget {
                 isCheck =!isCheck;
                 print(value);
             },
-
           ),
           Divider(
             //分割线
