@@ -10,13 +10,80 @@ class MyApp extends StatelessWidget {
       title: '列表',
       theme: ThemeData(primarySwatch: Colors.blue),
 //      home: new GrideView(),
-      home: new DataTableDemo(),
+      home: new StepperDemo(),
     );
   }
 }
 
-class PostDataSource extends DataTableSource{
-  var selectCount  =0 ;
+//步骤列表
+class StepperDemo extends StatefulWidget {
+  @override
+  _StepperState createState() => _StepperState();
+}
+
+class _StepperState extends State<StepperDemo> {
+  int _currentStepIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('stepper'),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(15.0),
+        child: ListView(
+          children: <Widget>[
+            Stepper(
+              onStepTapped: (int index){
+                setState(() {
+                  _currentStepIndex =index;
+                });
+              },
+              onStepContinue: (){
+                setState(() {
+                  _currentStepIndex<2?_currentStepIndex++:_currentStepIndex=0;
+
+                });
+              },
+              onStepCancel: (){
+                setState(() {
+                  _currentStepIndex>0?_currentStepIndex--:_currentStepIndex=2;
+                });
+              },
+              currentStep: _currentStepIndex,
+              steps: [
+                Step(
+                  title: Text(messagedata[0].title),
+                  subtitle: Text(messagedata[0].title),
+                  content: Text(messagedata[0].subTitle),
+                  isActive: _currentStepIndex == 0,
+                ),
+                Step(
+                  title: Text(messagedata[1].title),
+                  subtitle: Text(messagedata[1].title),
+                  content: Text(messagedata[1].subTitle),
+                  isActive: _currentStepIndex == 1,
+                ),
+                Step(
+                  title: Text(messagedata[2].title),
+                  subtitle: Text(messagedata[2].title),
+                  content: Text(messagedata[2].subTitle),
+                  isActive: _currentStepIndex == 2,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+//DataTable 分页
+class PostDataSource extends DataTableSource {
+  var selectCount = 0;
+
   @override
   // TODO: implement rowCount
   int get rowCount => messagedata.length;
@@ -50,13 +117,14 @@ class PostDataSource extends DataTableSource{
           fit: BoxFit.cover,
         ),
       )
-    ],index:  index);
+    ], index: index);
   }
-
 }
+
 class _DatatableState extends State<DataTableDemo> {
   int _sortColumnIndex;
-  bool _sortAscending =true;
+  bool _sortAscending = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +148,7 @@ class _DatatableState extends State<DataTableDemo> {
               ),
               DataColumn(label: Text('Image')),
             ],
+//选择框
 //            rows: messagedata.map((data) {
 //              return DataRow(
 //                selected: data.selected,
