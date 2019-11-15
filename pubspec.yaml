@@ -28,6 +28,8 @@ dependencies:
   scoped_model: ^1.0.1
   rxdart: ^0.22.6
   http: ^0.12.0+2
+  flutter_localizations:
+    sdk: flutter
 dev_dependencies:
   flutter_test:
     sdk: flutter
