@@ -46,6 +46,7 @@ class HttpState extends State<HttpDemo> {
 
   Future<_Response> fetchPost() async {
     final response = await http.get('https://api.apiopen.top/singlePoetry');
+    //    final response = await Dio().get('https://api.apiopen.top/singlePoetry');
     print("statusCode:${response.statusCode} \r\n  body:${response.body}");
     if (response.statusCode == 200) {
       final _responseBody = json.decode(response.body);
