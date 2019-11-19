@@ -30,23 +30,24 @@ class _StreamDemoState extends State<StreamDemoHome> {
   StreamSubscription _streamSubscription;
   StreamController<String> _streamController;
   StreamSink<String> _streamSink;
-  String _data = '';
+  String _data = 'Stream future delayed  duration 3 seconds';
 
   @override
   void initState() {
     super.initState();
-    //定义Stream
+    //1、定义Stream
 //    Stream<String> _streamDemo = Stream.fromFuture(fetchData());
-//    _streamSubscription = _streamDemo.listen(onData, onError: onError, onDone: onDone);
-
-    //控制Stream
+//    _streamSubscription =
+//        _streamDemo.listen(onData, onError: onError, onDone: onDone);
+//
+    //2、控制Stream
 //    _streamController = StreamController<String>();
     _streamController = StreamController.broadcast(); //多次订阅
     _streamSink = _streamController.sink;
     _streamSubscription = _streamController.stream
         .listen(onData, onError: onError, onDone: onDone);
-    _streamController.stream
-        .listen(onDataTwo, onError: onError, onDone: onDone);
+//    _streamController.stream
+//        .listen(onDataTwo, onError: onError, onDone: onDone);
   }
 
   @override
@@ -65,7 +66,7 @@ class _StreamDemoState extends State<StreamDemoHome> {
   }
 
   void onData(String data) {
-    print(data);
+    print("listen:$data");
     setState(() {
       _data = data;
     });
@@ -76,14 +77,19 @@ class _StreamDemoState extends State<StreamDemoHome> {
   }
 
   Future<String> fetchData() async {
-    await Future.delayed(Duration(seconds: 3));
-    return "hello`~~";
+    String result ;
+    await Future.delayed(Duration(seconds: 3), () {
+      return "future 3 seconds is ok!!!";
+    }).then((data){
+      result= data;
+      print("result:$result");
+    });
+    return result;
   }
 
   void _onAddStream() async {
-    print('Add data to Stream');
     String data = await fetchData();
-//    _streamController .add(data);
+//    _streamController.add(data);
     _streamSink.add(data);
   }
 
@@ -113,7 +119,7 @@ class _StreamDemoState extends State<StreamDemoHome> {
               stream: _streamController.stream,
               initialData: '无须手动setState',
               builder: (context, snapshot) {
-      return Text(snapshot.data);
+                return Text(snapshot.data);
               },
             ),
             Text(_data),
