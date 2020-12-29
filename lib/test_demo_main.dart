@@ -26,7 +26,7 @@ class MyDemoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Demo'),
     );
   }
 }
@@ -54,22 +54,28 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                _myButton("Button练习", 1),
-                _myButton("Hero页面跳转", 2),
-                _myButton("Text文本练习", 3),
-                _myButton("页面跳转传值", 4),
-                _myButton("动画练习", 5),
-                _myButton("框架", 6),
-                _myButton("步骤列表", 7),
-                _myButton("ListView", 8),
-                _myButton("GrideView", 9),
-                _myButton("SliverView", 10),
-                _myButton("画板Canvas", 11),
-                _myButton("包装控件", 12),
-                _myButton("stack层叠布局", 13),
-                _myButton("图片裁剪", 14),
-                _myButton("手势监听", 15),
-                _myButton("滑动删除", 16)
+                Wrap(
+                  spacing: 18,
+                  runSpacing: 18,
+                  children: [
+                  _myButton("Button练习", 1),
+                  _myButton("Hero页面跳转", 2),
+                  _myButton("Text文本练习", 3),
+                  _myButton("页面跳转传值", 4),
+                  _myButton("动画练习", 5),
+                  _myButton("框架", 6),
+                  _myButton("步骤列表", 7),
+                  _myButton("ListView", 8),
+                  _myButton("GrideView", 9),
+                  _myButton("SliverView", 10),
+                  _myButton("画板Canvas", 11),
+                  _myButton("包装控件", 12),
+                  _myButton("stack层叠布局", 13),
+                  _myButton("图片裁剪", 14),
+                  _myButton("手势监听", 15),
+                  _myButton("滑动删除", 16)
+                ],),
+
 
               ],
             )),

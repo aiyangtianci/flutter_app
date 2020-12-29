@@ -36,7 +36,7 @@ class didiHome extends StatelessWidget {
             }).toList()),
             bottomNavigationBar: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
-                fixedColor: Colors.yellow,
+                fixedColor: Colors.blue,
                 items: [
                   BottomNavigationBarItem(
                       icon: Icon(Icons.message), title: Text('微信')),
@@ -53,9 +53,7 @@ class HomePage extends StatefulWidget {
   _didiSimpleState createState() => _didiSimpleState();
 }
 
-/**
- * PopupMenuButton
- */
+
 class _didiSimpleState extends State<HomePage> {
   Choice _selectChoice = choices[0];
 
@@ -150,10 +148,6 @@ const List<Choice> choices = <Choice>[
   Choice(title: '自行车', icon: Icons.directions_bike),
   Choice(title: '乘船', icon: Icons.directions_boat),
   Choice(title: '公交车', icon: Icons.directions_bus),
-  Choice(title: '火车', icon: Icons.directions_transit),
-  Choice(title: '步行', icon: Icons.directions_walk),
-  Choice(title: '乘船', icon: Icons.directions_boat),
-  Choice(title: '公交车', icon: Icons.directions_bus),
-  Choice(title: '火车', icon: Icons.directions_transit),
+  Choice(title: '火车', icon: Icons.directions_railway),
   Choice(title: '步行', icon: Icons.directions_walk),
 ];
