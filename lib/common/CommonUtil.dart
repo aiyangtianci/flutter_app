@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class CommonUtil{
   /** 获取屏幕宽度 */
@@ -21,4 +22,9 @@ class CommonUtil{
     return new DateTime.now().millisecondsSinceEpoch;
   }
 
+  static Widget empty(
+      {double width = 1, double height = 1, Color color = Colors.transparent}) {
+    return Placeholder(
+        fallbackWidth: width, fallbackHeight: height, color: color);
+  }
 }

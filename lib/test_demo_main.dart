@@ -10,6 +10,7 @@ import 'test/Navigator.dart';
 import 'test/TextWidget.dart';
 import 'test/Hero.dart';
 import 'test/buttonDemo.dart';
+import 'test/web_View.dart';
 import 'test/widget_banner.dart';
 
 
@@ -75,7 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   _myButton("图片裁剪", 14),
                   _myButton("手势监听", 15),
                   _myButton("滑动删除", 16),
-                    _myButton("Banner轮播图", 17)
+                    _myButton("Banner轮播图", 17),
+                    _myButton("WebViewPage", 18)
 
                   ],),
 
@@ -145,6 +147,9 @@ class _MyHomePageState extends State<MyHomePage> {
             break;
           case 17:
             _goPageRoute(ViewPagerDemo());
+            break;
+          case 18:
+            _goPageRoute(WebViewPage());
             break;
         }
       },
