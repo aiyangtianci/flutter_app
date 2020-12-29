@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'flash.dart';
 import './app.dart';
-import 'package:flutter_app/search.dart';
+import 'package:flutter_app/search/search.dart';
 import 'package:flutter_app/info/sliver.dart';
 
 

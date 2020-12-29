@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'common/toast.dart';
 import 'test/Animated.dart';
 import 'test/AppBar.dart';
 import 'test/CanvasPaint.dart';
@@ -152,8 +153,9 @@ class _MyHomePageState extends State<MyHomePage> {
   _floatButton() {
     return FloatingActionButton(
       onPressed: () {
-        Scaffold.of(context)
-            .showSnackBar(new SnackBar(content: Text('点赞了！真棒！～')));
+//        Scaffold.of(context)
+//            .showSnackBar(new SnackBar(content: Text('点赞了！真棒！～')));
+        Toast.show("点赞了！真棒！～", context, gravity: Toast.CENTER);
       },
       foregroundColor: Colors.white,
       backgroundColor: Colors.blue,

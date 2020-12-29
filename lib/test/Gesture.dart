@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/toast.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -19,9 +20,9 @@ class GestureDetection extends StatelessWidget {
 //        child: new GestureDetection(),
         child: GestureDetector(
           onTap: () {
-            print('my button  was  tap');
-            Scaffold.of(context)
-                .showSnackBar(new SnackBar(content: new Text('按下事件触发')));
+            Toast.show("点赞了！真棒！～", context, gravity: Toast.CENTER);
+//            Scaffold.of(context)
+//                .showSnackBar(new SnackBar(content: new Text('按下事件触发')));
           },
           child: new Container(
             padding: const EdgeInsets.all(12.0),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './common/touch_callback.dart';
+import '../common/touch_callback.dart';
 
 /**
  * 搜索
