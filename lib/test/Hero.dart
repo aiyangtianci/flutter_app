@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
       title: 'hero',
-      home: FirstPage(),
+      home: MyHeroDemo(),
     ));
 
-class FirstPage extends StatelessWidget {
+class MyHeroDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

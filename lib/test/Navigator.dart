@@ -9,10 +9,10 @@ class Product {
 
 void main() => runApp(new MaterialApp(
       title: '页面跳转',
-      home: new FirstScreen(),
+      home: new NavigatorDemo(),
     ));
 
-class FirstScreen extends StatelessWidget {
+class NavigatorDemo extends StatelessWidget {
   final List<Product> products =
       List.generate(20, (i) => new Product('商品${i}', '这是一个商品详情${i}'));
 

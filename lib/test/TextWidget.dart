@@ -8,7 +8,7 @@ void main() {
           appBar: new AppBar(
             title: new Text("文本控件"),
           ),
-          body: new ChipDemo()) //,
+          body: new TextFieldDemo()) //,
       ));
 }
 
@@ -16,78 +16,44 @@ class TextFieldDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    //绑定数据
-    final TextEditingController controller = TextEditingController();
-    controller.addListener(() {
-      print('${controller.text}');
-    });
 
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: TextField(
-          controller: controller,
-          maxLength: 30,
-          //右下角出现输入数量统计字符串
-          maxLines: 1,
-          autocorrect: true,//是否自动更正
-          autofocus: true,//是否自动对焦
-          obscureText: true,//是否是密码
-          textAlign: TextAlign.center,
-          inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],//允许的输入格式
-          style: TextStyle(fontSize: 26.0, color: Colors.green),
-          onChanged: (text) {
-            print('文本内容改变${text}');
-          },
-          onSubmitted: (text) {
-            print('文本内容提交${text}');
-          },
-          enabled: true,
-          //是否禁用
-          decoration: InputDecoration(
-            //装饰
-            fillColor: Colors.grey[200],
-            filled: true,
-            helperText: '请输入文字',
-            //辅助提示
-            prefixIcon: Icon(Icons.edit),
-            suffixText: '输入', //文本提示
-          ),
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        _text(),
+        SizedBox(height: 20.0),
+        _textRich(),
+        SizedBox(height: 20.0),
+        _textField(),
+        SizedBox(height: 20.0),
+        Divider(
+          //分割线
+          color: Colors.grey,
+          height: 52.0,
         ),
+        _chipDemo()
+      ],
+    ));
+  }
+
+  _text(){
+    return Text(
+      "红色 黑色删除线 25号",
+      style: new TextStyle(
+          color: const Color(0xffff0000),
+          decoration: TextDecoration.underline,
+          decorationColor: const Color(0xff000000),
+          decorationStyle: TextDecorationStyle.dashed,
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.bold,
+          fontSize: 20.0,
+          letterSpacing: 10 //空隙
       ),
     );
   }
-}
 
-class TextDemo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return new Column(
-      //纵队，列
-      children: <Widget>[
-        new Text(
-          "红色 黑色删除线 25号",
-          style: new TextStyle(
-              color: const Color(0xffff0000),
-              decoration: TextDecoration.underline,
-              decorationColor: const Color(0xff000000),
-              decorationStyle: TextDecorationStyle.dashed,
-              fontStyle: FontStyle.italic,
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0,
-              letterSpacing: 10 //空隙
-              ),
-        ),
-      ],
-    );
-  }
-}
-
-class RichTextDemo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
+  _textRich(){//富文本
     return RichText(
       text: TextSpan(
         text: "红色 黑色删除线 25号",
@@ -100,7 +66,7 @@ class RichTextDemo extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontSize: 20.0,
             letterSpacing: 10 //空隙
-            ),
+        ),
         children: [
           TextSpan(
               text: '子view，继承父style,也可以自定义',
@@ -111,14 +77,53 @@ class RichTextDemo extends StatelessWidget {
       ),
     );
   }
-}
-//小标签
-class ChipDemo extends StatelessWidget {
-  List<String> _tags = ['Apple','Banana','Lemon'];
-  bool isCheck = true;
 
-  @override
-  Widget build(BuildContext context) {
+  _textField(){
+    //绑定数据
+    final TextEditingController controller = TextEditingController();
+    controller.addListener(() {
+      print('${controller.text}');
+    });
+    return  TextField(
+      controller: controller,
+      maxLength: 30,
+      //右下角出现输入数量统计字符串
+      maxLines: 1,
+      autocorrect: true,
+      //是否自动更正
+      autofocus: true,
+      //是否自动对焦
+      obscureText: false,
+      //是否是密码
+      textAlign: TextAlign.center,
+      inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+      //允许的输入格式
+      style: TextStyle(fontSize: 26.0, color: Colors.green),
+      onChanged: (text) {
+        print('文本内容改变${text}');
+      },
+      onSubmitted: (text) {
+        print('文本内容提交${text}');
+      },
+      enabled: true,
+      //是否禁用
+      decoration: InputDecoration(
+        //装饰
+        fillColor: Colors.grey[200],
+        filled: true,
+        helperText: '请输入文字',
+        //辅助提示
+        prefixIcon: Icon(Icons.edit),
+        suffixText: '输入', //文本提示
+      ),
+    );
+  }
+
+//小标签
+  _chipDemo (){
+    List<String> _tags = ['Apple', 'Banana', 'Lemon'];
+    bool isCheck = true;
+
     return Center(
       child: Wrap(
         //wrap 代替row，可以设置间距和行距，自动换行
@@ -131,14 +136,13 @@ class ChipDemo extends StatelessWidget {
           ActionChip(
             label: Text('two'),
             backgroundColor: Colors.orange[300],
-            onPressed: (){
-
-            },
+            onPressed: () {},
           ),
           ChoiceChip(
             selected: isCheck,
-            onSelected: (value){//value是选中状态
-              isCheck =!isCheck;
+            onSelected: (value) {
+              //value是选中状态
+              isCheck = !isCheck;
               print(value);
             },
             selectedColor: Colors.blue[100],
@@ -154,33 +158,34 @@ class ChipDemo extends StatelessWidget {
               backgroundImage: NetworkImage(
                   'https://avatar.csdnimg.cn/F/D/2/3_csdn_aiyang.jpg'),
             ),
-            selected: isCheck,//未被选中
-            onSelected: (value){//value是选中状态
-                isCheck =!isCheck;
-                print(value);
+            selected: isCheck, //未被选中
+            onSelected: (value) {
+              //value是选中状态
+              isCheck = !isCheck;
+              print(value);
             },
-          ),
-          Divider(
-            //分割线
-            color: Colors.grey,
-            height: 52.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _tags.map((tag){
-            return Chip(
-              label:Text(tag),
-              onDeleted: () {
-                _tags.remove(tag);
+            children: _tags.map(
+                  (tag) {
+                return Chip(
+                  label: Text(tag),
+                  onDeleted: () {
+                    _tags.remove(tag);
+                  },
+                  deleteIcon: Icon(Icons.delete_forever),
+                  deleteIconColor: Colors.white,
+                  deleteButtonTooltipMessage: 'remove this chip of tag',
+                );
               },
-              deleteIcon: Icon(Icons.delete_forever),
-              deleteIconColor: Colors.white,
-              deleteButtonTooltipMessage: 'remove this chip of tag',
-            );
-            },).toList(),
+            ).toList(),
           ),
         ],
       ),
     );
+
   }
 }
+
+

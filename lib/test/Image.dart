@@ -79,50 +79,58 @@ class StackDemo extends StatelessWidget {
 class ImageDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Center(
-      child: new Container(
-        width: 200,
-        height: 200,
-        decoration: new BoxDecoration(
-          color: Colors.lightBlueAccent,
-          //背景色
+    return
+      new Scaffold(
+        appBar: AppBar(
+          title: Text('图片裁剪'),
+        ),
+        body:  Center(
+          child: new Container(
+            width: 200,
+            height: 200,
+            decoration: new BoxDecoration(
+              color: Colors.lightBlueAccent,
+              //背景色
 //            gradient: LinearGradient(//线性渐变色
 //                begin: FractionalOffset(0.5, 0.0),//偏移量
 //                end: FractionalOffset(1.0, 1.0),
 //                colors: <Color>[Colors.red,Colors.green,Colors.blue,Colors.grey]),
-          gradient: RadialGradient(
-            center: Alignment(-0.0, -0.0), //中心抽偏移量
-            radius: 0.6, //圆形半径
-            colors: <Color>[Colors.red, Colors.green, Colors.blue, Colors.grey],
-          ),
-          border: new Border.all(color: Colors.amber, width: 8.0),
-          borderRadius: new BorderRadius.all(const Radius.circular(30.0)),
-          boxShadow: <BoxShadow>[
-            new BoxShadow(
-              color: Colors.grey,
-              blurRadius: 8.0, //模糊值
-              spreadRadius: 8.0, //扩散半径
-              offset: Offset(-1.0, 1.0), //偏移量
-            )
-          ],
-        ),
-        child: new Center(
-          //Oval椭圆、RRect圆角、Rect矩形、Path路径
-          child: ClipRRect(
+              gradient: RadialGradient(
+                center: Alignment(-0.0, -0.0), //中心抽偏移量
+                radius: 0.6, //圆形半径
+                colors: <Color>[Colors.red, Colors.green, Colors.blue, Colors.grey],
+              ),
+              border: new Border.all(color: Colors.amber, width: 8.0),
+              borderRadius: new BorderRadius.all(const Radius.circular(30.0)),
+              boxShadow: <BoxShadow>[
+                new BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 8.0, //模糊值
+                  spreadRadius: 8.0, //扩散半径
+                  offset: Offset(-1.0, 1.0), //偏移量
+                )
+              ],
+            ),
+            child: new Center(
+              //Oval椭圆、RRect圆角、Rect矩形、Path路径
+              child: ClipRRect(
 //            clipper: RectClipper(),
 //            clipper: TriangleCliper(),
-            borderRadius: BorderRadius.all(Radius.circular(30.0)), //RRect角度
+                borderRadius: BorderRadius.all(Radius.circular(30.0)), //RRect角度
 
-            child: RotatedBox(
-              quarterTurns: 1, //1=90度
-              child: new Image.network(
-                'https://www.baidu.com/img/bd_logo1.png?qua=high',
+                child: RotatedBox(
+                  quarterTurns: 1, //1=90度
+                  child: new Image.network(
+                    'https://www.baidu.com/img/bd_logo1.png?qua=high',
+                  ),
+                ),
               ),
             ),
           ),
         ),
-      ),
-    );
+      )
+
+      ;
   }
 }
 
