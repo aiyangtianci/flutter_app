@@ -10,6 +10,7 @@ import 'test/Navigator.dart';
 import 'test/TextWidget.dart';
 import 'test/Hero.dart';
 import 'test/buttonDemo.dart';
+import 'test/widget_banner.dart';
 
 
 /// 练习 Demo 入口
@@ -73,8 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   _myButton("stack层叠布局", 13),
                   _myButton("图片裁剪", 14),
                   _myButton("手势监听", 15),
-                  _myButton("滑动删除", 16)
-                ],),
+                  _myButton("滑动删除", 16),
+                    _myButton("Banner轮播图", 17)
+
+                  ],),
 
 
               ],
@@ -139,6 +142,9 @@ class _MyHomePageState extends State<MyHomePage> {
             break;
           case 16:
             _goPageRoute(ListDelDemo());
+            break;
+          case 17:
+            _goPageRoute(ViewPagerDemo());
             break;
         }
       },
