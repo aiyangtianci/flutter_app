@@ -46,6 +46,7 @@ class CustomBanner extends StatefulWidget {
   final int onTap;
   var curve;
   int defaultCurIndex;
+
   CustomBanner(this._images,
       {this.height = 230,
       this.onTap,
@@ -61,40 +62,28 @@ class CustomBanner extends StatefulWidget {
 
 class SetState extends State<CustomBanner> {
   int _pageLength;
-  Timer mTimer;
+  Timer _timer;
   PageController _pageController;
-  int _curIndex ;
+  int _curIndex;
+
   @override
   void initState() {
     super.initState();
-    _curIndex =widget.defaultCurIndex;
+    _curIndex = widget.defaultCurIndex;
     _pageLength = widget._images.length;
     _pageController = PageController(
       viewportFraction: 0.9, //站屏比例
       initialPage: widget.defaultCurIndex, //默认加载项
     );
-    mTimer = Timer.periodic(Duration(seconds:3), (t) {
-      //定时器
-      _curIndex++;
-      if(_curIndex >=_pageLength){
-        _curIndex = 0;
-      }
-      print("curIndex:" + _curIndex.toString());
-      _pageController.animateToPage(
-        _curIndex,
-        duration: Duration(milliseconds: 300),
-        curve: Curves.linear,
-      );
-    });
-
+   _initTimer();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    mTimer.cancel();
-    print("dispose!!");
-
+    _timer.cancel();
+    _timer = null;
   }
 
   @override
@@ -121,17 +110,23 @@ class SetState extends State<CustomBanner> {
               onPageChanged: (index) {
                 //页面改变
                 print("index:" + index.toString());
-                setState(() {});
+                setState(() {
+                  _curIndex = index;
+                });
               },
               itemBuilder: (context, index) {
-                return TouchCallBack(
-                    child: Image.network(
-                  widget._images[index % _pageLength].avatar,
-                  fit: BoxFit.cover,
-                ),
-                onPressed: (){
-                  Toast.show("当前page为～$_curIndex", context, gravity: Toast.CENTER);
-                },);
+                return GestureDetector(
+                    onPanDown: _cancelTimer(),
+                    child: TouchCallBack(
+                      child: Image.network(
+                        widget._images[index % _pageLength].avatar,
+                        fit: BoxFit.cover,
+                      ),
+                      onPressed: () {
+                        Toast.show("当前page为～${_curIndex %_pageLength}", context,
+                            gravity: Toast.CENTER);
+                      },
+                    ));
               },
             ),
             Positioned(
@@ -148,7 +143,7 @@ class SetState extends State<CustomBanner> {
                         height: 10,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: _curIndex == index
+                            color: (_curIndex %_pageLength) == index
                                 ? Colors.blue
                                 : Colors.white),
                       );
@@ -158,4 +153,26 @@ class SetState extends State<CustomBanner> {
           ],
         ));
   }
+
+  _cancelTimer() {
+    if (_timer != null) {
+      _timer.cancel();
+      _timer = null;
+      _initTimer();
+    }
+  }
+
+  //定时器
+  void _initTimer() {
+    _timer = Timer.periodic(Duration(seconds: 3), (t) {
+      _curIndex++;
+      print("curIndex:" + _curIndex.toString());
+      _pageController.animateToPage(
+        _curIndex,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.linear,
+      );
+    });
+  }
+
 }
