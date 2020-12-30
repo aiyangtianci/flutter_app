@@ -1,3 +1,5 @@
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -5,11 +7,36 @@ void main() {
   runApp(new TextFieldDemo() );
 }
 
-class TextFieldDemo extends StatelessWidget {
+class TextFieldDemo extends StatefulWidget {
+  @override
+  State createState() {
+    return _SetState();
+  }
+}
+
+
+class _SetState extends State<TextFieldDemo>{
+  var _statementDesc = "实名认证需要收集你的姓名，身份证号并采集面部信息，详见";
+  var _statementName = "《用户隐私政策》";
+  TapGestureRecognizer _privacyProtocolRecognizer;
+
+  void _openPrivateProtocol() {
+      print("112323");
+  }
+  @override
+  void initState() {
+    super.initState();
+    _privacyProtocolRecognizer = TapGestureRecognizer();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _privacyProtocolRecognizer.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
     return
       new MaterialApp(
           title: "my text demo",
@@ -56,25 +83,20 @@ class TextFieldDemo extends StatelessWidget {
   }
 
   _textRich(){//富文本
+    //  LongPressGestureRecognizer _longPressGestureRecognizer;
+    //    _longPressGestureRecognizer = new LongPressGestureRecognizer()
+//    ..onLongPress = _handelLittleTapGes;
     return RichText(
       text: TextSpan(
-        text: "红色 黑色删除线 25号",
-        style: new TextStyle(
-            backgroundColor: const Color(0xffff0000),
-            decoration: TextDecoration.underline,
-            decorationColor: const Color(0xff000000),
-            decorationStyle: TextDecorationStyle.dashed,
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
-            letterSpacing: 10 //空隙
-        ),
+        text: _statementDesc,
+        style: TextStyle(color: Colors.grey, fontSize: 23),
         children: [
           TextSpan(
-              text: '子view，继承父style,也可以自定义',
-              style: TextStyle(
-                fontWeight: FontWeight.w300,
-              )),
+            text: _statementName,
+            style: TextStyle(color: Colors.black),
+            recognizer: _privacyProtocolRecognizer
+              ..onTap = _openPrivateProtocol,
+          )
         ],
       ),
     );
@@ -92,7 +114,7 @@ class TextFieldDemo extends StatelessWidget {
       //右下角出现输入数量统计字符串
       maxLines: 1,
       autocorrect: true, //是否自动更正
-      autofocus: true, //是否自动对焦
+      autofocus: false, //是否自动对焦
       obscureText: false, //是否是密码
       cursorColor: Colors.red,//光标
       cursorRadius: Radius.circular(16.0),
@@ -123,6 +145,7 @@ class TextFieldDemo extends StatelessWidget {
         icon: Icon(Icons.person), //输入框左侧图标
         suffixIcon: Icon(Icons.chevron_right), //输入框内右侧图标
         suffixText: '输入', //文本提示
+        border: InputBorder.none,//无底边
       ),
     );
   }
