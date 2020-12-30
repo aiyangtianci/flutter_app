@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  runApp(new MaterialApp(
-      title: "my text demo",
-      home: new Scaffold(
-          appBar: new AppBar(
-            title: new Text("文本控件"),
-          ),
-          body: new TextFieldDemo()) //,
-      ));
+  runApp(new TextFieldDemo() );
 }
 
 class TextFieldDemo extends StatelessWidget {
@@ -17,24 +10,33 @@ class TextFieldDemo extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        _text(),
-        SizedBox(height: 20.0),
-        _textRich(),
-        SizedBox(height: 20.0),
-        _textField(),
-        SizedBox(height: 20.0),
-        Divider(
-          //分割线
-          color: Colors.grey,
-          height: 52.0,
-        ),
-        _chipDemo()
-      ],
-    ));
+    return
+      new MaterialApp(
+          title: "my text demo",
+          home: new Scaffold(
+              appBar: new AppBar(
+                title: new Text("文本控件"),
+              ),
+              body: Center(
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _text(),
+              SizedBox(height: 20.0),
+              _textRich(),
+              SizedBox(height: 20.0),
+              _textField(),
+              SizedBox(height: 20.0),
+              Divider(
+                //分割线
+                color: Colors.grey,
+                height: 52.0,
+              ),
+              _chipDemo()
+            ],
+          ))) //,
+      )
+     ;
   }
 
   _text(){
@@ -89,15 +91,17 @@ class TextFieldDemo extends StatelessWidget {
       maxLength: 30,
       //右下角出现输入数量统计字符串
       maxLines: 1,
-      autocorrect: true,
-      //是否自动更正
-      autofocus: true,
-      //是否自动对焦
-      obscureText: false,
-      //是否是密码
+      autocorrect: true, //是否自动更正
+      autofocus: true, //是否自动对焦
+      obscureText: false, //是否是密码
+      cursorColor: Colors.red,//光标
+      cursorRadius: Radius.circular(16.0),
+      cursorWidth: 16.0,
       textAlign: TextAlign.center,
       inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+      textInputAction: TextInputAction.search,//提交按钮
       //允许的输入格式
+      keyboardType: TextInputType.number,//.text（普通完整键盘）\emailAddress（带有“@”的普通键盘）\datetime（带有“/”和“：”的数字键盘）\.multiline（带有选项以启用有符号和十进制模式的数字键盘）
       style: TextStyle(fontSize: 26.0, color: Colors.green),
       onChanged: (text) {
         print('文本内容改变${text}');
@@ -111,9 +115,13 @@ class TextFieldDemo extends StatelessWidget {
         //装饰
         fillColor: Colors.grey[200],
         filled: true,
-        helperText: '请输入文字',
         //辅助提示
+        helperText: '请输入文字',
+        labelText: '请输入文字',
+        hintText: '请输入文字',
         prefixIcon: Icon(Icons.edit),
+        icon: Icon(Icons.person), //输入框左侧图标
+        suffixIcon: Icon(Icons.chevron_right), //输入框内右侧图标
         suffixText: '输入', //文本提示
       ),
     );
