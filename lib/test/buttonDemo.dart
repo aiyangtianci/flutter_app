@@ -68,11 +68,22 @@ class _MyBodyState extends State<MyBody> {
                         width: 300,
                         height: 50,
                         padding: const EdgeInsets.all(8),
-                        margin: const EdgeInsets.symmetric(horizontal: 18,vertical: 18),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 18, vertical: 18),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.lightGreen[500],
-                        ),
+                            borderRadius: BorderRadius.circular(15),
+//                          color: Colors.lightGreen[500],
+                            gradient: LinearGradient(//渐变色
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                stops: [
+                                  0.0,
+                                  1.0
+                                ],
+                                colors: [
+                                  Color.fromRGBO(255, 128, 144, 1),
+                                  Color.fromRGBO(255, 80, 93, 1)
+                                ])),
                         child: Center(
                           child: Text("自定义"),
                         ),
