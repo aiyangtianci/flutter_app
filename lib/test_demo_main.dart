@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/test/PickerDemo.dart';
 import 'package:flutter_app/test/Slider_Demo.dart';
 import 'common/toast.dart';
 import 'test/Animated.dart';
@@ -77,7 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 _myButton("滑动删除", 16),
                 _myButton("Banner轮播图", 17),
                 _myButton("WebViewPage", 18),
-                _myButton("滑动进度条", 19)
+                _myButton("滑动进度条", 19),
+                _myButton("滑动进度条", 20)
+
               ],
             ),
           ],
@@ -151,6 +154,9 @@ class _MyHomePageState extends State<MyHomePage> {
             break;
           case 19:
             _goPageRoute(SliderDemo());
+            break;
+          case 20:
+            _goPageRoute(PickerDemo());
             break;
         }
       },
