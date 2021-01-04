@@ -120,7 +120,6 @@ class _SetState extends State<TextFieldDemo>{
       cursorRadius: Radius.circular(16.0),
       cursorWidth: 16.0,
       textAlign: TextAlign.center,
-      inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
       textInputAction: TextInputAction.search,//提交按钮
       //允许的输入格式
       keyboardType: TextInputType.number,//.text（普通完整键盘）\emailAddress（带有“@”的普通键盘）\datetime（带有“/”和“：”的数字键盘）\.multiline（带有选项以启用有符号和十进制模式的数字键盘）
@@ -147,6 +146,10 @@ class _SetState extends State<TextFieldDemo>{
         suffixText: '输入', //文本提示
         border: InputBorder.none,//无底边
       ),
+      inputFormatters: <TextInputFormatter>[
+        LengthLimitingTextInputFormatter(5)//限制字数
+        ,WhitelistingTextInputFormatter.digitsOnly
+      ],
     );
   }
 
