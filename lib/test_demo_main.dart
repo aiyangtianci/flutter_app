@@ -12,6 +12,7 @@ import 'test/Navigator.dart';
 import 'test/TextWidget.dart';
 import 'test/Hero.dart';
 import 'test/buttonDemo.dart';
+import 'test/selectCommonBottomSheet.dart';
 import 'test/web_View.dart';
 import 'test/widget_banner.dart';
 
@@ -79,8 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 _myButton("Banner轮播图", 17),
                 _myButton("WebViewPage", 18),
                 _myButton("滑动进度条", 19),
-                _myButton("滑动进度条", 20)
-
+                _myButton("滚轮选择器", 20),
+                _myButton("相册拍摄选择框", 21)
               ],
             ),
           ],
@@ -158,6 +159,9 @@ class _MyHomePageState extends State<MyHomePage> {
           case 20:
             _goPageRoute(PickerDemo());
             break;
+          case 21:
+            _showDialog();
+            break;
         }
       },
       textColor: Colors.white,
@@ -172,6 +176,23 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return page;
     }));
+  }
+
+  _showDialog(){
+    showDialog(
+        barrierDismissible: true,//是否点击空白区域关闭对话框,默认为true，可以关闭
+        context: context,
+        builder: (BuildContext context) {
+          var list = List();
+          list.add('相册');
+          list.add('相机');
+          return CommonBottomSheet(
+            list: list,
+            onItemClickListener: (index) async {
+              Navigator.pop(context);
+            },
+          );
+        });
   }
 
   _floatButton() {
